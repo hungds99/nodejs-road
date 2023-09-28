@@ -1,4 +1,4 @@
-const { parentPort, workerData, isMainThread } = require('worker_threads');
+import { parentPort, workerData, isMainThread } from 'worker_threads';
 
 const blockingCountFn = (num) => {
   let count = 0;
@@ -10,8 +10,7 @@ const blockingCountFn = (num) => {
 
 parentPort.on('message', () => {
   if (workerData) {
-    console.log('Worker thread started');
-    console.log('Is main thread?', isMainThread);
+    console.log('Worker thread started in main thread? ', isMainThread);
     const count = blockingCountFn(workerData);
     parentPort.postMessage(count);
   }

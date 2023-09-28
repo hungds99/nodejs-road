@@ -32,7 +32,7 @@ app.get('/blocking', (req, res) => {
 app.get('/worker-threads', (req, res) => {
   console.log('Routing to worker threads route');
   const worker = new Worker('./workers.js', { workerData: 10 });
-  console.log('Is main thread?', isMainThread);
+  console.log('Routing running in thread? ', isMainThread);
   worker.postMessage('count');
   worker.on('message', (count) => {
     res.send(`Hello from worker threads route! ${count}`);
